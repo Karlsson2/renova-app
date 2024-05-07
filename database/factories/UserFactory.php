@@ -23,14 +23,21 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $roles = ['logistik', 'admin', 'tekniker', 'chef'];
+        $facility = ['Munkegärde', "Kläpp", "Sävenäs"];
+
         return [
-            'name' => fake()->name(),
+            'firstName' => fake()->firstName(),
+            'lastName' => fake()->lastName(),
+            'role' => $roles[array_rand($roles)],
+            'facility' => $facility[array_rand($facility)],
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
             'remember_token' => Str::random(10),
         ];
     }
+
 
     /**
      * Indicate that the model's email address should be unverified.

@@ -2,9 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,11 +16,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $users = User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        foreach ($users as $user) {
+            // Create an order for the user
+            $order = Order::factory()->create([
+                'created_by' => $user->id,
+            ]);
+
+            OrderItem::factory(3)->create([
+                'order_id' => $order->id,
+            ]);
+        }
     }
 }
