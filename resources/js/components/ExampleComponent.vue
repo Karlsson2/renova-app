@@ -8,6 +8,11 @@
                     <div class="card-body">
                         I'm an example component.
                     </div>
+                    <nav>
+                        <router-link to="/">Home</router-link> <br>
+                        <router-link to="/about">About</router-link>
+                    </nav>
+                    <router-view></router-view>
                 </div>
             </div>
         </div>
