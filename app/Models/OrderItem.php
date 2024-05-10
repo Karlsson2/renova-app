@@ -13,8 +13,11 @@ class OrderItem extends Model
 
     protected $fillable = [
         'fraction',
-        'containers',
+        'total_containers',
+        'fraction_name',
+        'container_number',
         'priority',
+        'taskid',
         'other'
     ];
 

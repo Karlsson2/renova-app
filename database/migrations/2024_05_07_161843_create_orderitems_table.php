@@ -16,7 +16,10 @@ return new class extends Migration
             $table->unsignedBigInteger('order_id');
             $table->foreign('order_id')->references('id')->on('orders')->onDelete('cascade');
             $table->string('fraction');
-            $table->integer('containers');
+            $table->integer('total_containers');
+            $table->string('container_number');
+            $table->string('fraction_name');
+            $table->string('taskid');
             $table->integer('priority');
             $table->string('other')->nullable();
             $table->timestamps();
@@ -28,6 +31,15 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('orderitems');
+
+
+
+
+        Schema::table('order_items', function (Blueprint $table) {
+            $table->dropForeign(['order_id']);
+        });
+
+        Schema::dropIfExists('orders');
+        Schema::dropIfExists('order_items');
     }
 };
